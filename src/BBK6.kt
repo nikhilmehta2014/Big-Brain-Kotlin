@@ -65,7 +65,7 @@ fun main() {
  *
  * complexity : O(n^2)
  */
-fun decodeMorse(code: String): String {
+/*fun decodeMorse(code: String): String {
     val morseWords = code.split("   ")
     val humanized = StringBuilder()
     for (morseWord in morseWords) {
@@ -78,4 +78,22 @@ fun decodeMorse(code: String): String {
         humanized.append(" ")
     }
     return humanized.toString()
+}*/
+
+/**
+ * Approach 2
+ * Imperative equivalent code in functional style
+ *
+ * complexity : O(n^2)
+ *
+ * Performance hit in here due to [joinToString] operation one at the outer loop and multiple times into the inner loop.
+ */
+fun decodeMorse(code: String): String {
+    return code.trim()
+        .split("   ")
+        .joinToString(separator = " ") { word ->
+            word.split(" ").joinToString(separator = "") { char ->
+                morseDecoder[char] ?: ""
+            }
+        }
 }
