@@ -105,10 +105,25 @@ fun decodeMorse(code: String): String {
  *
  * complexity : O(n)
  */
-fun decodeMorse(code: String) = code
+/*fun decodeMorse(code: String) = code
     .split("  ")
     .flatMap {
         it.split(" ")
     }.joinToString("") {
         morseDecoder[it] ?: " "
-    }
+    }*/
+
+/**
+ * Approach 4
+ * using [replace], [joinToString]
+ *
+ * complexity : O(n)
+ */
+fun decodeMorse(code: String): String {
+    return code.trim()
+        .replace("  ", " ")
+        .split(" ")
+        .joinToString("") {
+            morseDecoder[it] ?: " "
+        }
+}
