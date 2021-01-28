@@ -111,8 +111,19 @@ fun imposter(integers: Array<Int>): Int {
  *
  * complexity: O(n+1) ~ O(n)
  */
-fun imposter(integers: Array<Int>): Int {
+/*fun imposter(integers: Array<Int>): Int {
     // break into list of two items of even/odd
     val (even, odd) = integers.partition { it % 2 == 0 }
     return if (even.size == 1) even[0] else odd[0]
+}*/
+
+/**
+ * Approach 6
+ * using [single], [singleOrNull]
+ *
+ * complexity : best => O(n), worse=> O(2n) ~ O(n)
+ */
+fun imposter(integers: Array<Int>) = with(integers){
+    // find odd if null find even
+    singleOrNull { it % 2 == 0 } ?: single { it % 2 != 0 }
 }
