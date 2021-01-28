@@ -88,6 +88,7 @@ fun main() {
  *
  * Performance hit in here due to [joinToString] operation one at the outer loop and multiple times into the inner loop.
  */
+/*
 fun decodeMorse(code: String): String {
     return code.trim()
         .split("   ")
@@ -96,4 +97,18 @@ fun decodeMorse(code: String): String {
                 morseDecoder[char] ?: ""
             }
         }
-}
+}*/
+
+/**
+ * Approach 3
+ * using [flatMap], [map], [joinToString]
+ *
+ * complexity : O(n)
+ */
+fun decodeMorse(code: String) = code
+    .split("  ")
+    .flatMap {
+        it.split(" ")
+    }.joinToString("") {
+        morseDecoder[it] ?: " "
+    }
