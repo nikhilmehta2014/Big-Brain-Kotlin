@@ -84,12 +84,22 @@ fun highAndLow(numbers: String): String {
 
 /**
  * Approach 4
- * Using [stdlib] functions of [Max] and [Min]
+ * Shorter and cleaner form of Approach 3
  */
-fun highAndLow(numbers: String): String =
+/*fun highAndLow(numbers: String): String =
     numbers.split(" ")
         .map(String::toIntOrNull)
         .filterNotNull()
         .let {
-            "${it.maxOrNull()} ${it.minOrNull()}"
+            "${it.max()} ${it.minOrNull()}"
+        }*/
+
+/**
+ * Approach 5
+ * Shorter and cleaner form of Approach 4
+ */
+fun highAndLow(numbers: String): String =
+    numbers.split(" ").mapNotNull(String::toIntOrNull)
+        .let {
+            "${it.max()} ${it.minOrNull()}"
         }
