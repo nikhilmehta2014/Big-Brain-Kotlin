@@ -51,11 +51,11 @@ fun highAndLow(numbers: String): String {
  * Cons:
  * 1. Still bit more Expressive code.
  */
-fun highAndLow(numbers: String): String {
+/*fun highAndLow(numbers: String): String {
     val firstNumber: Int = numbers.split(" ")[0].toIntOrNull() ?: -1
     val result = numbers.split(" ")
         .fold(
-            Pair</*max*/Int,/*min*/Int>(firstNumber,firstNumber)
+            Pair<*//*max*//*Int,*//*min*//*Int>(firstNumber,firstNumber)
         ){ acc, it ->
             val item = it.toIntOrNull()?:-1
             return@fold when{
@@ -65,4 +65,19 @@ fun highAndLow(numbers: String): String {
             }
         }
     return "${result.first} ${result.second}"
+}*/
+
+/**
+ * Approach 3
+ * using [Collection.map], [filterNotNull], [maxOrNull], [minOrNull]
+ */
+fun highAndLow(numbers: String): String {
+    val nums = numbers.split(" ")
+        .map {
+            it.toIntOrNull()
+        }
+        .filterNotNull()
+    val max = nums.maxOrNull()
+    val min = nums.minOrNull()
+    return "$max $min"
 }
