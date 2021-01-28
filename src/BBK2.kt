@@ -98,8 +98,31 @@ fun highAndLow(numbers: String): String {
  * Approach 5
  * Shorter and cleaner form of Approach 4
  */
-fun highAndLow(numbers: String): String =
+/*fun highAndLow(numbers: String): String =
     numbers.split(" ").mapNotNull(String::toIntOrNull)
         .let {
             "${it.max()} ${it.minOrNull()}"
+        }*/
+
+/**
+ * Approach 6
+ * using [splitToSequence], [first], [maxOf]
+ *
+ * Notes:
+ * 1. [splitToSequence] does not iterate on the string, it only generates a lazy sequence
+ * 2. example used splitToSequence(' ') and not splitToSequence(" "), that is because char split is more efficient
+ * 3. To make the solution even more efficient, should replace [acc.copy] part with [when] expression
+ */
+fun highAndLow(numbers:String):String{
+    val seq = numbers.splitToSequence(' ')
+    val first = seq.first().toIntOrNull()
+    val result = seq.fold(Pair(first, first)) { acc, item ->
+        val numb = item.toIntOrNull()
+        return@fold if(numb!=null){
+            acc.copy(first = maxOf(acc.first ?: -1, numb), second = minOf(acc.second ?: -1, numb))
+        }else{
+            acc
         }
+    }
+    return "${result.first} ${result.second}"
+}
