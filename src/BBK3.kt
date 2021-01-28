@@ -67,7 +67,7 @@ fun main() {
  * Approach 3
  * using [foldIndexed]
  */
-fun mumble(input: String): String {
+/*fun mumble(input: String): String {
     val answer = input.toCharArray().foldIndexed("") { index, acc, item ->
         var result = "$acc${item.toUpperCase()}"
         repeat(index) {
@@ -79,4 +79,14 @@ fun mumble(input: String): String {
         result
     }
     return answer
-}
+}*/
+
+/**
+ * Approach 4
+ * using [mapIndexed], [joinToString]
+ */
+fun mumble(words: String): String =
+    words.mapIndexed { index, word ->
+        "${word.toUpperCase()}${word.toString().toLowerCase().repeat(index)}"
+    }
+        .joinToString("-")
