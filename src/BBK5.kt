@@ -78,6 +78,7 @@ fun imposter(integers: Array<Int>): Int {
  *
  * complexity: O(2n+1) ~ O(n)
  */
+/*
 fun imposter(integers: Array<Int>): Int {
     // filter that pass even numbers
     val evens = integers.filter { it % 2 == 0 }
@@ -90,4 +91,16 @@ fun imposter(integers: Array<Int>): Int {
     }else{
         odds.first()
     }
-}
+}*/
+
+/**
+ * Approach 4
+ * using [groupBy], [first]
+ *
+ * complexity: O(n+1) ~ O(n)
+ */
+fun imposter(integers: Array<Int>): Int =
+    integers.groupBy { it % 2 == 0 } // convert to map with even-odd
+        .values // list of map values
+        .first { it.size == 1 } // get first whose size is 1
+        .first() // get the first item
