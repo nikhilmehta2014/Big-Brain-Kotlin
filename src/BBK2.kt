@@ -1,3 +1,5 @@
+import kotlin.system.measureTimeMillis
+
 // BBK#2: Find Max and Min
 
 // Question: Print the Highest and Lowest number from the input string.
@@ -113,6 +115,7 @@ fun highAndLow(numbers: String): String {
  * 2. example used splitToSequence(' ') and not splitToSequence(" "), that is because char split is more efficient
  * 3. To make the solution even more efficient, should replace [acc.copy] part with [when] expression
  */
+/*
 fun highAndLow(numbers:String):String{
     val seq = numbers.splitToSequence(' ')
     val first = seq.first().toIntOrNull()
@@ -125,4 +128,24 @@ fun highAndLow(numbers:String):String{
         }
     }
     return "${result.first} ${result.second}"
+}*/
+
+/**
+ * Approach 7
+ * using [measureTimeMillis], [sorted]
+ */
+fun highAndLow(numbers: String): String {
+    measureTimeMillis {
+        numbers
+            .split(" ")
+            .map { it.toInt() }
+            .sorted()
+            .let {
+                println("Lowest : ${it.first()}")
+                println("Highest : ${it.last()}")
+            }
+    }.let {
+        println("Theapache64 solution took $it ms")
+    }
+    return ""
 }
