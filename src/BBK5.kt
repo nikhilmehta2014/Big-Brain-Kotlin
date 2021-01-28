@@ -53,6 +53,7 @@ fun main() {
  *
  * complexity : O(4n+2) ~ O(n)
  */
+/*
 fun imposter(integers: Array<Int>): Int {
     // convert to 0 and 1
     val flatten =integers.map{
@@ -68,5 +69,25 @@ fun imposter(integers: Array<Int>): Int {
         integers[flatten.indexOf(1)]
     } else {
         integers[flatten.indexOf(0)]
+    }
+}*/
+
+/**
+ * Approach 3
+ * using [filter], [first]
+ *
+ * complexity: O(2n+1) ~ O(n)
+ */
+fun imposter(integers: Array<Int>): Int {
+    // filter that pass even numbers
+    val evens = integers.filter { it % 2 == 0 }
+    // filter that pass odd numbers
+    val odds = integers.filter { it % 2 != 0 }
+
+    // which ever has size 1, print its first element
+    return if(evens.size == 1){
+        evens.first()
+    }else{
+        odds.first()
     }
 }
