@@ -1,3 +1,4 @@
+import java.util.*
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
@@ -14,7 +15,7 @@ fun main() {
 
 /**
  * Approach 1
- * using [toCharArray], [withIndex], [toUpperCase], [toLowerCase]
+ * using [toCharArray], [withIndex], [repeat], [toUpperCase], [toLowerCase]
  *
  * Performance : took ~ 0.154 ms
  */
@@ -85,8 +86,22 @@ fun main() {
  * Approach 4
  * using [mapIndexed], [joinToString]
  */
-fun mumble(words: String): String =
+/*fun mumble(words: String): String =
     words.mapIndexed { index, word ->
         "${word.toUpperCase()}${word.toString().toLowerCase().repeat(index)}"
     }
-        .joinToString("-")
+        .joinToString("-")*/
+
+/**
+ * Approach 5
+ * using [mapIndexed], [capitalize], [joinToString]
+ *
+ * Pros:
+ * Cleaner alternative to Approach 4 by using [capitalize] and reducing the noise related to String Concatenation.
+ */
+fun mumble(words: String): String {
+    val output = words.toLowerCase(Locale.getDefault()).mapIndexed { index, c ->
+        c.toString().repeat(index + 1).capitalize()
+    }
+    return output.joinToString("-")
+}
