@@ -99,8 +99,20 @@ fun imposter(integers: Array<Int>): Int {
  *
  * complexity: O(n+1) ~ O(n)
  */
-fun imposter(integers: Array<Int>): Int =
+/*fun imposter(integers: Array<Int>): Int =
     integers.groupBy { it % 2 == 0 } // convert to map with even-odd
         .values // list of map values
         .first { it.size == 1 } // get first whose size is 1
-        .first() // get the first item
+        .first() // get the first item*/
+
+/**
+ * Approach 5
+ * using [partition]
+ *
+ * complexity: O(n+1) ~ O(n)
+ */
+fun imposter(integers: Array<Int>): Int {
+    // break into list of two items of even/odd
+    val (even, odd) = integers.partition { it % 2 == 0 }
+    return if (even.size == 1) even[0] else odd[0]
+}
