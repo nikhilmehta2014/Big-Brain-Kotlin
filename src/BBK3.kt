@@ -44,7 +44,7 @@ fun main() {
  *
  * Performance : took ~ 0.16 ms
  */
-fun mumble(input: String): String {
+/*fun mumble(input: String): String {
     measureNanoTime {
         var result = ""
         input.toCharArray().forEachIndexed { index, item ->
@@ -61,4 +61,22 @@ fun mumble(input: String): String {
         println("$it nanoseconds")
     }
     return ""
+}*/
+
+/**
+ * Approach 3
+ * using [foldIndexed]
+ */
+fun mumble(input: String): String {
+    val answer = input.toCharArray().foldIndexed("") { index, acc, item ->
+        var result = "$acc${item.toUpperCase()}"
+        repeat(index) {
+            result = "$result${item.toLowerCase()}"
+        }
+        if ((input.length - 1) != index) {
+            result = "$result-"
+        }
+        result
+    }
+    return answer
 }
