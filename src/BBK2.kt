@@ -23,6 +23,7 @@ fun main() {
  * For such use cases transformation operators should be used example [String.map], [String.reduce] etc.
  * 3. Logic is over expressive.
  */
+/*
 fun highAndLow(numbers: String): String {
     val numbs = numbers.split(" ")
     var max = numbs[0].toIntOrNull() ?: -1
@@ -37,4 +38,31 @@ fun highAndLow(numbers: String): String {
         }
     }
     return "max = ${max}, min = ${min}"
+}*/
+
+/**
+ * Approach 2
+ * using [String.fold]
+ *
+ * Pros:
+ * 1. We got rid of external mutation by getting rid of [max],[min] variables
+ * 2. By using [fold], we are reducing to the one result, mutations are scoped within the fold iteration.
+ *
+ * Cons:
+ * 1. Still bit more Expressive code.
+ */
+fun highAndLow(numbers: String): String {
+    val firstNumber: Int = numbers.split(" ")[0].toIntOrNull() ?: -1
+    val result = numbers.split(" ")
+        .fold(
+            Pair</*max*/Int,/*min*/Int>(firstNumber,firstNumber)
+        ){ acc, it ->
+            val item = it.toIntOrNull()?:-1
+            return@fold when{
+                item>acc.first -> acc.copy(first = item) // updateMax
+                item<acc.second -> acc.copy(second = item) // updateMin
+                else-> acc // do nothing..
+            }
+        }
+    return "${result.first} ${result.second}"
 }
