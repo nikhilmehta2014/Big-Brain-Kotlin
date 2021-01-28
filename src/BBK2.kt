@@ -71,7 +71,7 @@ fun highAndLow(numbers: String): String {
  * Approach 3
  * using [Collection.map], [filterNotNull], [maxOrNull], [minOrNull]
  */
-fun highAndLow(numbers: String): String {
+/*fun highAndLow(numbers: String): String {
     val nums = numbers.split(" ")
         .map {
             it.toIntOrNull()
@@ -80,4 +80,16 @@ fun highAndLow(numbers: String): String {
     val max = nums.maxOrNull()
     val min = nums.minOrNull()
     return "$max $min"
-}
+}*/
+
+/**
+ * Approach 4
+ * Using [stdlib] functions of [Max] and [Min]
+ */
+fun highAndLow(numbers: String): String =
+    numbers.split(" ")
+        .map(String::toIntOrNull)
+        .filterNotNull()
+        .let {
+            "${it.maxOrNull()} ${it.minOrNull()}"
+        }
