@@ -5,15 +5,15 @@
 // spinWords( "This is a test") => returns "This is a test"
 // spinWords( "This is another test" )=> returns "This is rehtona test"
 
-fun main(){
-    println(spinWords1("This is another test"))
+fun main() {
+    println(spinWords("This is another test"))
 }
 
 /**
  * Approach 1
- * using [reversed]
+ * Java-ish solution = using [for] loop and [reversed]
  */
-fun spinWords1(input: String): String {
+/*fun spinWords(input: String): String {
     val individualWordsList = input.split(" ")
     var reversedString = ""
     for (word in individualWordsList) {
@@ -24,4 +24,15 @@ fun spinWords1(input: String): String {
         }
     }
     return reversedString
+}*/
+
+/**
+ * Approach 2
+ * using [joinToString]
+ */
+fun spinWords(input: String): String = input.split(" ").joinToString(" ") { word ->
+    if (word.length > 5) {
+        word.reversed()
+    } else
+        word
 }
