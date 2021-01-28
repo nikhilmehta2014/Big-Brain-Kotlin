@@ -22,7 +22,7 @@ fun main() {
  *
  * complexity: O(3n+2) ~ O(n)
  */
-fun imposter(integers: Array<Int>): Int {
+/*fun imposter(integers: Array<Int>): Int {
     // convert array to 0,1
     val flattened = integers.map {
         abs(it % 2)
@@ -45,5 +45,28 @@ fun imposter(integers: Array<Int>): Int {
         integers[imposterIndex]
     else
         -1
-}
+}*/
 
+/**
+ * Approach 2
+ * using [map], [count]
+ *
+ * complexity : O(4n+2) ~ O(n)
+ */
+fun imposter(integers: Array<Int>): Int {
+    // convert to 0 and 1
+    val flatten =integers.map{
+        abs(it % 2)
+    }
+    // count 0
+    val odd = flatten.count { it == 0 }
+    // count 1
+    val even = flatten.count { it == 1 }
+
+    // find and return index
+    return if(odd > even){
+        integers[flatten.indexOf(1)]
+    } else {
+        integers[flatten.indexOf(0)]
+    }
+}
