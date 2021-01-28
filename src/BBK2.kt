@@ -134,7 +134,7 @@ fun highAndLow(numbers:String):String{
  * Approach 7
  * using [measureTimeMillis], [sorted]
  */
-fun highAndLow(numbers: String): String {
+/*fun highAndLow(numbers: String): String {
     measureTimeMillis {
         numbers
             .split(" ")
@@ -148,4 +148,22 @@ fun highAndLow(numbers: String): String {
         println("Theapache64 solution took $it ms")
     }
     return ""
-}
+}*/
+
+private const val DEFAULT_MIN = -1
+private const val DEFAULT_MAX = -1
+
+/**
+ * Approach 8
+ * using [distinct]
+ */
+fun highAndLow(numberString: String): String =
+    numberString
+        .split(' ')
+        .mapNotNull { stringItem ->
+            stringItem.toIntOrNull()
+        }
+        .distinct()
+        .let { numbersList ->
+            "${numbersList.maxOrNull() ?: DEFAULT_MAX} ${numbersList.minOrNull() ?: DEFAULT_MIN}"
+        }
